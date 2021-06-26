@@ -12,6 +12,23 @@
         font-size: 40px;
     }
     
+    .h2 {
+        font-weight: bolder;
+        font-size: 15px;
+    }
+    
+    #highscores-link {
+        color: rgb(130, 44, 130);
+        font-size: 15px;
+    }
+    
+    nav {
+        color: rgb(130, 44, 130);
+        font-size: 20px;
+        text-align: center;
+        font-weight: bold;
+    }
+    
     p {
         margin: 15px 0;
     }
@@ -22,6 +39,7 @@
         border-radius: 5px;
         padding: 2px 10px;
         margin-right: 10px;
+        font-size: 15px;
     }
     
     button:hover {
@@ -32,7 +50,8 @@
         overflow: auto;
         max-width: 90%;
         display: block;
-        margin: auto;
+        margin-left: 25%;
+        margin-right: 25%;
         margin-top: 100px;
     }
     
@@ -41,9 +60,13 @@
     }
     
     .quiz-page,
-    .results-page,
-    .score-page {
+    .results-page {
         text-align: left;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .score-page {
+        text-align: center;
         font-family: Arial, Helvetica, sans-serif;
     }
     
@@ -72,6 +95,7 @@
     .answer-button {
         display: block;
         margin: 15px 0;
+        font-size: 15px;
     }
     
     .answer-message {
@@ -99,15 +123,43 @@
         outline: none;
     }
     
-    @media screen and (min-width: 1024px) {
+    @media (max-width: 690px) {
         #container {
             max-width: 800px;
         }
+        #title {
+            font-weight: bolder;
+            font-size: 25px;
+        }
+        #highscores-link {
+            font-size: 13px;
+        }
+        nav {
+            font-size: 20px;
+        }
+        #container {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
     }
     
-    @media screen and (max-width: 470px) {
+    @media (max-width: 470px) {
         #initials {
             display: block;
-            margin: 15px 0;
+            margin: 25px 0;
+        }
+        #title {
+            font-weight: bolder;
+            font-size: 15px;
+        }
+        #highscores-link {
+            font-size: 12px;
+        }
+        nav {
+            font-size: 15px;
+        }
+        #container {
+            margin-left: 20px;
+            margin-right: 20px;
         }
     }

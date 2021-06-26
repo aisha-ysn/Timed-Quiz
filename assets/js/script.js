@@ -40,9 +40,9 @@ function nextQuestion() {
 
     // changes appearance of page
     container.className = 'results-page mt-5'
-    title.textContent = 'Question ' + (currentQuestion + 1);
+    title.textContent = questions[currentQuestion].title;
     title.setAttribute('class', 'h2')
-    text.textContent = questions[currentQuestion].title;
+    text.textContent = 'Select answer from the options listed below ';
     text.className = 'h4';
     text.setAttribute('style', 'border-top: 1px double #ba251a; padding-top: 20px;')
 
