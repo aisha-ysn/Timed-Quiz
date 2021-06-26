@@ -277,31 +277,26 @@ highscoresLink.addEventListener('click', seeHighScores);
 let questions = [{
         title: "Commonly used data types DO NOT include:",
         choices: ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
-        answer: "alerts"
+        answer: "3. alerts"
     },
     {
         title: "The condition in an if / else statement is enclosed within ____.",
         choices: ["1. quotes", "2. curly brackets", "3. parentheses", "4. square brackets"],
-        answer: "parentheses"
+        answer: "3. parentheses"
     },
     {
         title: "What is the name of the statement that is used to exit or end a loop?",
         choices: ["1. falter statement", "2. conditional statement", "3. break statement", "4. close statement"],
-        answer: "break statement"
+        answer: "3. break statement"
     },
     {
         title: "What is the element called that is used to describe the set of variables, objects, and functions you explicitly have access to?",
         choices: ["1. scope", "2. restriction", "3. range", "4. output level"],
-        answer: "scope"
+        answer: "1. scope"
     },
     {
         title: "What is the type of loop that continues through a block of code as long as the specified condition remains TRUE?",
         choices: ["1. conditional loop", "2. for loop", "3. else loop", "4. while loop"],
-        answer: "while loop"
-    },
-    {
-        title: "Which of the following is correct JavaScript syntax to manipulate the DOM?",
-        choices: ["document.getElement('p').innerHTML = 'foo'", "#demo.innerHTML = 'foo'", "document.getElementById('demo').innerHTML = 'foo'", "document.getElementByName('p').innerHTML = 'foo'"],
-        answer: "document.getElementById('demo').innerHTML = 'foo'"
+        answer: "4. while loop"
     }
 ]
