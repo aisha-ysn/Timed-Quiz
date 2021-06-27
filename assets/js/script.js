@@ -12,33 +12,32 @@ let inputField = document.getElementById('input-field');
 let initials = document.getElementById('initials');
 let submitButton = document.getElementById('submit-button');
 
-//sets variables
+//variables
 let timerSecs = 0;
 let currentQuestion = 0
 let score = 0;
 let scoreArray = [];
 let timerInterval = false;
 
-// starts game
+// start
 function startQuiz() {
-    // sets timer start at 75 seconds
+    // timer start at 75 seconds
     timerSecs = 50;
     timerDisplay.textContent = timerSecs;
 
-    // starts countdown
+    //countdown
     countdown();
 
-    // starts question page
+
     nextQuestion();
 
-    // make the start button disappear
+    //start button disappear
     startButton.style.display = 'none';
 }
 
-// changes display to next question
+//next question
 function nextQuestion() {
 
-    // changes appearance of page
     container.className = 'results-page mt-5'
     title.textContent = questions[currentQuestion].title;
     title.setAttribute('class', 'h2')
@@ -46,30 +45,28 @@ function nextQuestion() {
     text.className = 'h4';
     text.setAttribute('style', 'border-top: 1px double #ba251a; padding-top: 20px;')
 
-    // displays the answer buttons
+
     quizAnswers.style.display = 'block';
 
-    // takes the answer options from the current index in the questions array
-    // and assigns them one by one to each of the answer buttonsj
-    // could be made into a for loop if there were more questions
+    // assigns new question options
     answerButtons[0].textContent = questions[currentQuestion].choices[0];
     answerButtons[1].textContent = questions[currentQuestion].choices[1];
     answerButtons[2].textContent = questions[currentQuestion].choices[2];
     answerButtons[3].textContent = questions[currentQuestion].choices[3];
 
-    // clicking one of the buttons calls the checkAnswer function
+    // Clicking answer
     for (i = 0; i < answerButtons.length; i++) {
         answerButtons[i].addEventListener('click', checkAnswer);
     }
 }
 
-// checks whether chosen answer matches answer
+// is answer correct?
 function checkAnswer(event) {
-    // checking that the button and answer values are the same
+
     console.log('User chose: ' + event.target.textContent);
     console.log('Correct answer: ' + questions[currentQuestion].answer);
 
-    // if selection is correct displays correct and increases score and currentQuestion variables
+    // if correct displays correct and increases score
     if (event.target.textContent === questions[currentQuestion].answer) {
         answerMessage.style.display = 'block';
         answerMessage.textContent = 'Correct!';
@@ -77,7 +74,7 @@ function checkAnswer(event) {
         currentQuestion++;
         score++;
 
-        // message disappears after set time
+        // after set time
         setTimeout(function() {
             answerMessage.style.display = 'none';
         }, 800);
