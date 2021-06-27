@@ -1,4 +1,4 @@
-flet navBar = document.querySelector('nav');
+let navBar = document.querySelector('nav');
 let highscoresLink = document.getElementById('highscores-link');
 let container = document.getElementById('container');
 let timerDisplay = document.getElementById('timer');
