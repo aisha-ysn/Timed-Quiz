@@ -1,4 +1,4 @@
-let navBar = document.querySelector('nav');
+flet navBar = document.querySelector('nav');
 let highscoresLink = document.getElementById('highscores-link');
 let container = document.getElementById('container');
 let timerDisplay = document.getElementById('timer');
@@ -75,41 +75,41 @@ function checkAnswer(event) {
         score++;
 
         // after set time
-        setTimeout(function() {
+        setTimeout(function () {
             answerMessage.style.display = 'none';
         }, 800);
 
-        // end game if current question is 5
+        // end game after Q5
         if (currentQuestion === questions.length) {
             endGame();
 
-            // else go to next question
+            // otherwise go to next Q
         } else {
             nextQuestion();
         };
 
-        // if selection is incorrect displays incorrect and decreases total time and increases currentQuestion
+        // decrease time by 10 seconds
     } else {
         currentQuestion++;
         answerMessage.style.display = 'block';
         answerMessage.textContent = 'Incorrect!';
         answerMessage.className = 'answer-message';
 
-        // message disappears after set time
-        setTimeout(function() {
+        // incorrect disappears after the set time
+        setTimeout(function () {
             answerMessage.style.display = 'none';
         }, 800);
 
-        // ends game if timer is less than 10 seconds, as 10 seconds will be removed
+        // the game ends if timer is less than 10 seconds
         if (timerSecs < 10) {
             timerSecs -= 10;
             endGame();
 
-            // ends game if user is on the last question
+            // ends game after Q5
         } else if (currentQuestion === 5) {
             endGame();
 
-            // else subtracts time from timer and moves onto next question
+            // or minus 10 secs from timer and go to the next question
         } else {
             timerSecs -= 10;
             nextQuestion();
@@ -117,9 +117,8 @@ function checkAnswer(event) {
     }
 };
 
-// triggers end game page
+
 function endGame() {
-    // changes page display
     quizAnswers.style.display = 'none';
     container.className = 'quiz-page mt-5'
     title.setAttribute('class', 'h2');
@@ -128,28 +127,23 @@ function endGame() {
     text.textContent = 'Your final score is ' + score + '. Enter your initials to see the high scores!';
     inputField.style.display = 'block';
 
-    // changes title display depending on whether user ran out of time or not
     if (timerSecs <= 0) {
         title.textContent = 'You ran out of time!';
     } else {
         title.textContent = 'All done!';
     }
 
-    // when submit button is clicked, initals are stored
-    // and user is brought to high score page
     submitButton.addEventListener('click', storeHighScore);
 }
 
-// stores input from initials input and puts it in local storage
-// then takes user to high score page to see high scores
+
 function storeHighScore(event) {
     event.preventDefault();
 
-    // if no input is detected nothing happens
     if (initials.value.length === 0) {
         return
 
-        // otherwise initial/score combo is pushed to score array
+
     } else {
         newScore = {
             userName: initials.value.trim(),
@@ -157,39 +151,32 @@ function storeHighScore(event) {
         };
         scoreArray.push(newScore);
 
-        // sorts scores so that the highest number is pushed to the front of array
+
         scoreArray.sort((a, b) => b.userScore - a.userScore);
 
-        // array is made into a string and pushed to local storage
+
         localStorage.setItem('score', JSON.stringify(scoreArray));
 
-        // user is taken to highscore page
+
         seeHighScores();
     }
 }
 
-// initially load scores from local storage into scores array
 function loadHighScore() {
-    // parses string value from local storage into new array
+
     storedScores = JSON.parse(localStorage.getItem('score'));
 
-    // if new array isn't empty (no previously saved scores) then save into scoreArray
     if (storedScores !== null) {
         scoreArray = storedScores;
 
-        // return the new scoreArray value
         return scoreArray;
     }
-}
 
-// shows highs scores
-function seeHighScores() {
-    // clears timerInterval if countdown has been initiated
+
     if (timerInterval) {
         clearInterval(timerInterval);
     };
 
-    // creates new list and button elements and appends them to container
     container.className = 'score-page mt-5 card bg-light p-4';
     let ul = document.createElement('ul');
     let returnButton = document.createElement('button');
@@ -200,7 +187,6 @@ function seeHighScores() {
     container.appendChild(returnButton);
     container.appendChild(clearButton);
 
-    // removes navbar and other elements
     startButton.style.display = 'none';
     navBar.style.visibility = 'hidden';
     title.textContent = 'High Scores';
@@ -209,7 +195,7 @@ function seeHighScores() {
     quizAnswers.style.display = 'none';
     inputField.style.display = 'none';
 
-    // render a new li for each highscore
+
     for (i = 0; i < scoreArray.length; i++) {
         let score = scoreArray[i].userName + ' : ' + scoreArray[i].userScore;
 
@@ -218,33 +204,30 @@ function seeHighScores() {
         ul.appendChild(li);
     }
 
-    // adds event listener for return button to bring person back to index.html
-    returnButton.addEventListener('click', function() {
+
+    returnButton.addEventListener('click', function () {
         location.href = 'index.html'
     });
 
-    // adds event listener for clear button for clearing local storage and deletes li elements
-    clearButton.addEventListener('click', function() {
+    clearButton.addEventListener('click', function () {
         localStorage.clear();
         ul.innerHTML = '';
     });
 };
 
-// counts down from starting timerSecs 
+
 function countdown() {
-    // interval function that counts down
-    timerInterval = setInterval(function() {
+
+    timerInterval = setInterval(function () {
         timerSecs--;
         timerDisplay.textContent = timerSecs;
 
-        // alert that user has run out of time and end game if timer runs out
         if (timerSecs < 1) {
             timerDisplay.textContent = 0;
             endGame();
             clearInterval(timerInterval);
         };
 
-        // clear timer if current question hits 5 (game is over)
         if (currentQuestion === 5) {
             timerDisplay.textContent = timerSecs;
             clearInterval(timerInterval);
@@ -252,48 +235,43 @@ function countdown() {
     }, 1000)
 }
 
-// code to prevent blue focus outline from showing unless user is a keyboard user
 function handleFirstTab(e) {
-    if (e.keyCode === 9) { // the 'I am a keyboard user' key
+    if (e.keyCode === 9) {
         document.body.classList.add('user-is-tabbing');
         window.removeEventListener('keydown', handleFirstTab);
     }
 }
 
-// checks if user is keyboard user
 window.addEventListener('keydown', handleFirstTab);
 
-// loads parsed local storage data into score array
 loadHighScore();
 
-// event listener for when you click the start button
 startButton.addEventListener('click', startQuiz);
 
-// event listener for when you click highscores link in navbar
 highscoresLink.addEventListener('click', seeHighScores);
 let questions = [{
-        title: "Commonly used data types DO NOT include:",
-        choices: ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
-        answer: "3. alerts"
-    },
-    {
-        title: "The condition in an if / else statement is enclosed within ____.",
-        choices: ["1. quotes", "2. curly brackets", "3. parentheses", "4. square brackets"],
-        answer: "3. parentheses"
-    },
-    {
-        title: "What is the name of the statement that is used to exit or end a loop?",
-        choices: ["1. falter statement", "2. conditional statement", "3. break statement", "4. close statement"],
-        answer: "3. break statement"
-    },
-    {
-        title: "What is the element called that is used to describe the set of variables, objects, and functions you explicitly have access to?",
-        choices: ["1. scope", "2. restriction", "3. range", "4. output level"],
-        answer: "1. scope"
-    },
-    {
-        title: "What is the type of loop that continues through a block of code as long as the specified condition remains TRUE?",
-        choices: ["1. conditional loop", "2. for loop", "3. else loop", "4. while loop"],
-        answer: "4. while loop"
-    }
+    title: "Commonly used data types DO NOT include:",
+    choices: ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
+    answer: "3. alerts"
+},
+{
+    title: "The condition in an if / else statement is enclosed within ____.",
+    choices: ["1. quotes", "2. curly brackets", "3. parentheses", "4. square brackets"],
+    answer: "3. parentheses"
+},
+{
+    title: "What is the name of the statement that is used to exit or end a loop?",
+    choices: ["1. falter statement", "2. conditional statement", "3. break statement", "4. close statement"],
+    answer: "3. break statement"
+},
+{
+    title: "What is the element called that is used to describe the set of variables, objects, and functions you explicitly have access to?",
+    choices: ["1. scope", "2. restriction", "3. range", "4. output level"],
+    answer: "1. scope"
+},
+{
+    title: "What is the type of loop that continues through a block of code as long as the specified condition remains TRUE?",
+    choices: ["1. conditional loop", "2. for loop", "3. else loop", "4. while loop"],
+    answer: "4. while loop"
+}
 ]
